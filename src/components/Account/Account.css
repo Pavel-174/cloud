@@ -17,3 +17,10 @@
     margin: 0 0 0 30px;
     color: red;
 }
+
+.account__cards {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}

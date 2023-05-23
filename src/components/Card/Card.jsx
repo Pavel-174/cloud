@@ -1,14 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
+import DescriptionIcon from '@mui/icons-material/Description';
 import API from '../../utils/API';
+import './Card.css';
 
-function Card ({ id, setNumber, setFiles }) {
-
-    console.log(id);
+function Card ({ id, name, mimeType, url, createdAt, setNumber, setFiles }) {
 
     const handleDelete = (e) => {
-        e.stopPropagation(); // запрещаем всплытие
-        const jwt = localStorage.getItem("token");
+        e.stopPropagation();
         API.removeCard(id)
         .then(() => {
             API.getUserData()
@@ -23,7 +22,14 @@ function Card ({ id, setNumber, setFiles }) {
   }
 
   return ( 
-    <li key={id}>{id} <button onClick={handleDelete}><DeleteIcon /></button></li>
+    <li className='card'>
+        { mimeType.includes('image/')  ? <img src={url} alt={name}/> : <DescriptionIcon fontSize='large'/> }
+        <h3> {name} </h3>
+        <span>{id}</span>
+        <span>File type: {mimeType}</span>
+        <span>{createdAt}</span>
+        <button className='card__button' onClick={handleDelete}><DeleteIcon /></button>
+    </li>
   )
 }
 

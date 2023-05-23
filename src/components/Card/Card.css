@@ -1,0 +1,15 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    background-color: lightgrey;
+    align-items: center;
+}
+
+.card__button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+}

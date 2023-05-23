@@ -66,8 +66,8 @@ function Account({ onSignOut }) {
       </div>
       <h3>Количество загруженных файлов: {number}/20</h3>
       <Dashboard uppy={uppy} disabled={number <= 20 ? false : true}/>
-      <ul>
-          {files.map(file => (<Card key={file.id} data={file} id ={file.id} setNumber={setNumber} setFiles={setFiles}/>))}
+      <ul className='account__cards'>
+          {files.map(file => (<Card key={file.id} id ={file.id} name={file.name} mimeType={file.mimeType} url={file.url} createdAt={file.createdAt} setNumber={setNumber} setFiles={setFiles}/>))}
       </ul>
     </div>
   )
