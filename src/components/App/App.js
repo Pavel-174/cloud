@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
@@ -13,6 +13,11 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate ();
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
 
   function onLogin(data) {
     API.signIn(data)
@@ -40,22 +45,6 @@ function App() {
         console.log(`Что-то пошло не так! Ошибка регистрации. ${ error }`);
       });
   }
-
-  function onSignOut() {
-    API.signOut();
-    Token.deleteToken();
-    setLoggedIn(false);
-    navigate('/signin');
-  }
-
-  // function onRegister(name, email, password) {
-  //   API.signUp(name, email, password).then(() => {
-  //     console.log('Вы успешно зарегистрировались!');
-  //     onLogin(email, password);
-  //   }).catch((error) => {
-  //     console.log(`Что-то пошло не так! Ошибка регистрации. ${ error }`);
-  //   });
-  // }
   
   function getUserData() {
     API.getUserData()
@@ -67,6 +56,13 @@ function App() {
       .catch((error) => {
         console.log(`Что-то пошло не так! Ошибка сервера ${ error }`);
       })
+  }
+
+  function onSignOut() {
+    API.signOut();
+    Token.deleteToken();
+    setLoggedIn(false);
+    navigate('/signin');
   }
 
   return (
