@@ -1,39 +1,58 @@
 import React, {useEffect, useState} from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import LogoutIcon from '@mui/icons-material/Logout';
 import API from '../../utils/API';
 import "./Account.css";
+import Uppy from "@uppy/core";
+import { Dashboard } from "@uppy/react";
+import "@uppy/dashboard/dist/style.css";
+import XHR from "@uppy/xhr-upload";
+
+
 
 function Account({ onSignOut }) {
 
     const [number, setNumber] = useState();
-    const [files, setFiles] = useState([])
+    const [files, setFiles] = useState([]);
+
 
     useEffect(() => {
       API.getUserData()
         .then((data) => {
           setNumber(data.files.length);
-          console.log(number);
+          setFiles(data.files);
         })
         .catch((error) => {
           console.log(`Ошибка сервера ${ error }`);
         });
     }, []);
 
-    const onInputChange = (e) => {
-      setFiles(e.target.files)
-    };
+    const uppy = new Uppy({
+      restrictions: {
+        maxNumberOfFiles: 20 - number,
+        maxTotalFileSize: 1048576,
+        allowedFileTypes: [
+          "image/*",
+          "application/*",
+          "text/*",
+        ],
+      },
+    });
 
-    const onSubmit = (e, data) => {
-      e.preventDefault();
-
-        API
-          .saveFile(data)
-          .catch(() => {
-            console.log("Mistake")
-          });
-    };
+    uppy.use(XHR, {
+      endpoint: "https://job.kitactive.ru/api/media/upload",
+      formData: true,
+      fieldName: "files[]",
+      headers: {
+        Authorization: `Bearer ${ localStorage.getItem('token') }`,
+      },
+    })
+    .on("upload-success", (response) => {
+       console.log(response);
+    })
+    .on("upload-error", (error) => {
+      console.log(error);
+    });
 
   return ( 
     <div className='account'>
@@ -42,17 +61,10 @@ function Account({ onSignOut }) {
         <button onClick={ onSignOut } className='account__button-exit'><LogoutIcon fontSize='large'/></button>
       </div>
       <h3>Количество загруженных файлов: {number}/20</h3>
-      <form method="post" action="#" id="#" onSubmit={onSubmit}>
-            <div className="form-group files">
-                <label>Upload Your File </label>
-                <input type="file"
-                       onChange={onInputChange}
-                       className="form-control"
-                       multiple/>
-            </div>
-
-            <button>Submit</button>
-        </form>
+      <Dashboard uppy={uppy} />
+      <ul>
+          {files.map(file => (<li key={file.id}>{file.id} <button><DeleteIcon/></button></li>))}
+      </ul>
     </div>
   )
 }

@@ -45,27 +45,6 @@ class MainAPI {
         headers: this._headers,
       }).then(this._handleRes);
     }
-
-    saveFile(data) {
-      return fetch(`${ this._URL }/api/media/upload`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${ localStorage.getItem('token') }`,
-          'Content-Length': `1024`,
-          'Content-Type':  [
-            "image/*",
-            "application/pdf",
-            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-            "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            "application/vnd.ms-excel",
-            "application/msword",
-            "application/vnd.ms-powerpoint",
-          ],
-        },
-        body: JSON.stringify(data),
-      }).then(this._handleRes);
-    }
   
     getToken(token) {
       return fetch(`${ this._URL }/api/media`, {
