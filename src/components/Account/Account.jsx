@@ -61,7 +61,7 @@ function Account({ onSignOut }) {
         <button onClick={ onSignOut } className='account__button-exit'><LogoutIcon fontSize='large'/></button>
       </div>
       <h3>Количество загруженных файлов: {number}/20</h3>
-      <Dashboard uppy={uppy} />
+      <Dashboard uppy={uppy} disabled={true}/>
       <ul>
           {files.map(file => (<li key={file.id}>{file.id} <button><DeleteIcon/></button></li>))}
       </ul>
