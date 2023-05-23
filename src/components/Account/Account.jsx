@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import DeleteIcon from '@mui/icons-material/Delete';
 import LogoutIcon from '@mui/icons-material/Logout';
 import API from '../../utils/API';
 import "./Account.css";
@@ -7,6 +6,7 @@ import Uppy from "@uppy/core";
 import { Dashboard } from "@uppy/react";
 import "@uppy/dashboard/dist/style.css";
 import XHR from "@uppy/xhr-upload";
+import Card from '../Card/Card';
 
 
 
@@ -48,7 +48,11 @@ function Account({ onSignOut }) {
       },
     })
     .on("upload-success", (response) => {
-       console.log(response);
+      console.log(response);
+      API.getUserData().then((data) => {
+        setNumber(data.files.length);
+        setFiles(data.files);
+      })
     })
     .on("upload-error", (error) => {
       console.log(error);
@@ -61,9 +65,9 @@ function Account({ onSignOut }) {
         <button onClick={ onSignOut } className='account__button-exit'><LogoutIcon fontSize='large'/></button>
       </div>
       <h3>Количество загруженных файлов: {number}/20</h3>
-      <Dashboard uppy={uppy} disabled={true}/>
+      <Dashboard uppy={uppy} disabled={number <= 20 ? false : true}/>
       <ul>
-          {files.map(file => (<li key={file.id}>{file.id} <button><DeleteIcon/></button></li>))}
+          {files.map(file => (<Card key={file.id} data={file} id ={file.id} setNumber={setNumber} setFiles={setFiles}/>))}
       </ul>
     </div>
   )

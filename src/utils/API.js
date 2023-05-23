@@ -45,6 +45,13 @@ class MainAPI {
         headers: this._headers,
       }).then(this._handleRes);
     }
+
+    removeCard(id)  {
+      return fetch(`${this._URL}/api/media/${id}`, {
+        method: 'DELETE',
+        headers: this._headers,
+      });
+    }
   
     getToken(token) {
       return fetch(`${ this._URL }/api/media`, {
