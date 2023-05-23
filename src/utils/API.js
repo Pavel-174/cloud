@@ -52,6 +52,13 @@ class MainAPI {
         headers: this._headers,
       });
     }
+
+    getCard(id) {
+      return fetch(`${this._URL}/api/media/${id}`, {
+        method: 'GET',
+        headers: this._headers,
+      }).then(this._handleRes);
+    }
   
     getToken(token) {
       return fetch(`${ this._URL }/api/media`, {
