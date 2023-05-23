@@ -3,6 +3,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import LogoutIcon from '@mui/icons-material/Logout';
 import API from '../../utils/API';
+import "./Account.css";
 
 function Account({ onSignOut }) {
 
@@ -35,10 +36,12 @@ function Account({ onSignOut }) {
     };
 
   return ( 
-    <>
-      <h2>Личный кабинет</h2>
-      <h3>Количество загруженных файлов: {number}</h3>
-      <button onClick={ onSignOut }><LogoutIcon fontSize='large'/></button>
+    <div className='account'>
+      <div className='account__header-box'>
+        <h2>Личный кабинет</h2> 
+        <button onClick={ onSignOut } className='account__button-exit'><LogoutIcon fontSize='large'/></button>
+      </div>
+      <h3>Количество загруженных файлов: {number}/20</h3>
       <form method="post" action="#" id="#" onSubmit={onSubmit}>
             <div className="form-group files">
                 <label>Upload Your File </label>
@@ -50,7 +53,7 @@ function Account({ onSignOut }) {
 
             <button>Submit</button>
         </form>
-    </>
+    </div>
   )
 }
 
