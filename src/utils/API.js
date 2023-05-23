@@ -12,20 +12,18 @@ class MainAPI {
       return Promise.reject(`Ошибка: ${res.status}`);
     }
 
-    signUp({ email, password, name }) {
+    signUp({ name, email, password }) {
       return fetch(`${ this._URL }/api/register`, {
-        credentials: this.credentials,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password, name }),
+        body: JSON.stringify({ name, email, password }),
       }).then(this._handleRes);
     }
 
     signIn({ email, password }) {
       return fetch(`${ this._URL }/api/login`, {
-        credentials: this.credentials,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,17 +32,43 @@ class MainAPI {
       }).then(this._handleRes);
     }
 
+    signOut() {
+        return fetch(`${ this._URL }/api/logout`, {
+          method: 'POST',
+          headers: this._headers,
+        }).then(this._handleRes);
+      }
+
     getUserData() {
       return fetch(`${ this._URL }/api/media`, {
-        credentials: this.credentials,
         method: 'GET',
         headers: this._headers,
+      }).then(this._handleRes);
+    }
+
+    saveFile(data) {
+      return fetch(`${ this._URL }/api/media/upload`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${ localStorage.getItem('token') }`,
+          'Content-Length': `1024`,
+          'Content-Type':  [
+            "image/*",
+            "application/pdf",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "application/vnd.ms-excel",
+            "application/msword",
+            "application/vnd.ms-powerpoint",
+          ],
+        },
+        body: JSON.stringify(data),
       }).then(this._handleRes);
     }
   
     getToken(token) {
       return fetch(`${ this._URL }/api/media`, {
-        credentials: this.credentials,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
