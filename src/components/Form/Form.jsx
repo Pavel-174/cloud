@@ -36,8 +36,10 @@ function Form({ greeting, name, buttonText, onRegister, onLogin }) {
   
   return ( 
     <main className='form'>
-      <Link to="/" className="form__link">
-      </Link>
+      <Link 
+        to="/" 
+        className="form__link"
+      />
       <h2 className='form__header'>{ greeting }</h2>
       <form 
         className='form__form' 
@@ -90,11 +92,11 @@ function Form({ greeting, name, buttonText, onRegister, onLogin }) {
       </form>
       {name === 'signup'
         ? <p className='form__text'>Уже зарегистрированы?
-          <Link to='/signin' className='form__link'>Войти</Link>
-        </p>
+            <Link to='/signin' className='form__link'>Войти</Link>
+          </p>
         : <p className='form__text'>Ещё не зарегистрированы?
-          <Link to='/' className='form__link'>Регистрация</Link>
-        </p>
+            <Link to='/' className='form__link'>Регистрация</Link>
+          </p>
       }
     </main>
   )

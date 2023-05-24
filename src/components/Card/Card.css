@@ -13,6 +13,11 @@
     background-color: transparent;
     cursor: pointer;
     color: red;
+    transition: opacity 0.3s linear;
+}
+
+.card__button:hover {
+    opacity: 0.4;
 }
 
 .card__image {

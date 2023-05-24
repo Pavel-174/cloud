@@ -25,7 +25,7 @@ function Card ({ id, name, mimeType, fileName, url, createdAt, setNumber, setFil
     const handleDownload = (id) => {
         API.getCard(id)
         .then((response) => {
-            fileDownload(response, fileName, mimeType)
+            fileDownload(response, fileName, mimeType) //для скачивания файлов использовал пакетное решение ('js-file-download')
         })
         .catch((error) => {
             console.log(`Ошибка сервера ${ error }`);
@@ -34,12 +34,30 @@ function Card ({ id, name, mimeType, fileName, url, createdAt, setNumber, setFil
 
   return ( 
     <li className='card'>
-        { mimeType.includes('image/')  ? <img className='card__image' src={url} alt={name} onClick={handleDownload}/> : <DescriptionIcon fontSize='large' cursor='pointer' onClick={handleDownload}/> }
+        { mimeType.includes('image/')  ? // формат файла изображение ? отображаем картинку : отображаем иконку файла
+          <img 
+            className='card__image' 
+            src={url} 
+            alt={name} 
+            onClick={handleDownload}
+          /> 
+          : 
+          <DescriptionIcon 
+            fontSize='large' 
+            cursor='pointer' 
+            onClick={handleDownload}
+          /> 
+        }
         <h3> {name} </h3>
         <span>{id}</span>
         <span>File type: {mimeType}</span>
         <span>{createdAt}</span>
-        <button className='card__button' onClick={handleDelete}><DeleteIcon fontSize='large'/></button>
+        <button 
+          className='card__button' 
+          onClick={handleDelete}
+        >
+          <DeleteIcon fontSize='large'/>
+        </button>
     </li>
   )
 }

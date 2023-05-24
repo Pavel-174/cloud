@@ -16,6 +16,11 @@
     background-color: transparent;
     margin: 0 0 0 30px;
     color: red;
+    transition: opacity 0.3s linear;
+}
+
+.account__button-exit:hover {
+    opacity: 0.4;
 }
 
 .account__cards {

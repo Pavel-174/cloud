@@ -49,9 +49,7 @@ function App() {
   function getUserData() {
     API.getUserData()
       .then((data) => {
-        // setCurrentUser(data);
         setLoggedIn(true);
-        console.log(data); //удалить
       })
       .catch((error) => {
         console.log(`Что-то пошло не так! Ошибка сервера ${ error }`);
@@ -67,7 +65,6 @@ function App() {
 
   return (
     <div>
-    {/* <CurrentUserContext.Provider value={currentUser}> */}
       <Routes>
         <Route path='/' element = { !loggedIn ? <Register onRegister={ onRegister } /> : <Navigate to="/account" /> }/>
         <Route path='/signin' element = { !loggedIn ? <Login onLogin = { onLogin } /> : <Navigate to="/account" /> }/>
@@ -79,7 +76,6 @@ function App() {
               />
           } />
       </Routes>
-    {/* </CurrentUserContext.Provider> */}
     </div>
   );
 }

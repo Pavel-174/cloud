@@ -53,13 +53,6 @@ class MainAPI {
       });
     }
 
-    // getCard(id) {
-    //   return fetch(`${this._URL}/api/media/${id}`, {
-    //     method: 'GET',
-    //     headers: this._headers,
-    //   }).then(this._handleRes);
-    // }
-
     getCard(id) {
       return fetch (`${this._URL}/api/media/${id}`, {
         method: 'GET',
@@ -68,7 +61,6 @@ class MainAPI {
           'Authorization': `Bearer ${ localStorage.getItem('token') }`
         }
       })
-      // .then((response) => response.blob())
     }
 
     getToken(token) {
