@@ -7,10 +7,13 @@ import Account from '../Account/Account';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import API from '../../utils/API';
 import Token from '../../utils/Token';
+import Popup from '../Popup/Popup';
 
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [popupHeader, setPopupHeader] = useState('');
 
   const navigate = useNavigate ();
 
@@ -27,22 +30,25 @@ function App() {
           API.Token();
           setLoggedIn(true);
           getUserData();
-          navigate('/account');
+          navigate('/account')
         }
       })
       .catch((error) => {
-        console.log(`Что-то пошло не так! Ошибка авторизации. ${ error }`);
+        setPopupHeader(`Что-то пошло не так! Ошибка авторизации. ${ error }`);
+        setPopupOpen(true);
       });
   }
 
   function onRegister(data) {
     API.signUp(data)
       .then(() => {
-        console.log('Вы успешно зарегистрировались!');
+        setPopupHeader('Вы успешно зарегистрировались!');
+        setPopupOpen(true);
         onLogin(data);
       })
       .catch((error) => {
-        console.log(`Что-то пошло не так! Ошибка регистрации. ${ error }`);
+        setPopupHeader(`Что-то пошло не так! Ошибка регистрации. ${ error }`);
+        setPopupOpen(true);
       });
   }
   
@@ -52,7 +58,8 @@ function App() {
         setLoggedIn(true);
       })
       .catch((error) => {
-        console.log(`Что-то пошло не так! Ошибка сервера ${ error }`);
+        setPopupHeader(`Что-то пошло не так! Ошибка сервера ${ error }`);
+        setPopupOpen(true);
       })
   }
 
@@ -61,6 +68,11 @@ function App() {
     Token.deleteToken();
     setLoggedIn(false);
     navigate('/signin');
+  }
+
+  function popupClose() {
+    setPopupOpen(false);
+    setPopupHeader('');
   }
 
   return (
@@ -76,6 +88,11 @@ function App() {
               />
           } />
       </Routes>
+      <Popup 
+        header={ popupHeader } 
+        isOpen={ popupOpen } 
+        onClose={ popupClose } 
+      />
     </div>
   );
 }

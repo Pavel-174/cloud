@@ -49,7 +49,6 @@ function Account({ onSignOut }) {
       },
     })
     .on("upload-success", (response) => {
-      console.log(response);
       API.getUserData().then((data) => {
         setNumber(data.files.length);
         setFiles(data.files);
