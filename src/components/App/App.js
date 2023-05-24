@@ -30,7 +30,7 @@ function App() {
           API.Token();
           setLoggedIn(true);
           getUserData();
-          navigate('/cloud/account')
+          navigate('/account')
         }
       })
       .catch((error) => {
@@ -67,7 +67,7 @@ function App() {
     API.signOut();
     Token.deleteToken();
     setLoggedIn(false);
-    navigate('/cloud/signin');
+    navigate('/signin');
   }
 
   function popupClose() {
@@ -78,9 +78,9 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path='/cloud/' element = { !loggedIn ? <Register onRegister={ onRegister } /> : <Navigate to="/cloud//account" /> }/>
-        <Route path='/cloud//signin' element = { !loggedIn ? <Login onLogin = { onLogin } /> : <Navigate to="/cloud//account" /> }/>
-        <Route path='/cloud//account' element={
+        <Route path='/' element = { !loggedIn ? <Register onRegister={ onRegister } /> : <Navigate to="/account" /> }/>
+        <Route path='/signin' element = { !loggedIn ? <Login onLogin = { onLogin } /> : <Navigate to="/account" /> }/>
+        <Route path='/account' element={
               <ProtectedRoute 
                 component={ Account }
                 loggedIn={ loggedIn }
