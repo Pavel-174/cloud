@@ -58,8 +58,7 @@ function App() {
         setLoggedIn(true);
       })
       .catch((error) => {
-        setPopupHeader(`Что-то пошло не так! Ошибка сервера ${ error }`);
-        setPopupOpen(true);
+        console.log(error)
       })
   }
 
