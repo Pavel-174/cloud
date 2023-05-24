@@ -4,12 +4,19 @@
     list-style-type: none;
     background-color: lightgrey;
     align-items: center;
+    justify-content: center;
+    padding: 12px 12px;
 }
 
 .card__button {
     border: none;
     background-color: transparent;
     cursor: pointer;
-    width: 25px;
-    height: 25px;
+    color: red;
+}
+
+.card__image {
+    max-width: 100px;
+    max-height: 100px;
+    cursor: pointer;
 }

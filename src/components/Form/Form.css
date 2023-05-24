@@ -51,7 +51,7 @@
     color: white; 
     transition: opacity 0.3s linear;
     cursor: pointer;
-    background-color: rgba(52, 86, 243, 1);
+    background-color: gray;
   }
   
   .form__button:hover {

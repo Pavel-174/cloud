@@ -17,6 +17,7 @@
     "@uppy/progress-bar": "^3.0.2",
     "@uppy/react": "^3.1.2",
     "@uppy/xhr-upload": "^3.2.0",
+    "js-file-download": "^0.4.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",

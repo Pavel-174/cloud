@@ -53,13 +53,24 @@ class MainAPI {
       });
     }
 
+    // getCard(id) {
+    //   return fetch(`${this._URL}/api/media/${id}`, {
+    //     method: 'GET',
+    //     headers: this._headers,
+    //   }).then(this._handleRes);
+    // }
+
     getCard(id) {
-      return fetch(`${this._URL}/api/media/${id}`, {
+      return fetch (`${this._URL}/api/media/${id}`, {
         method: 'GET',
-        headers: this._headers,
-      }).then(this._handleRes);
+        headers: {
+          'Content-Type': ["image/*", "application/*", "text/*"],
+          'Authorization': `Bearer ${ localStorage.getItem('token') }`
+        }
+      })
+      // .then((response) => response.blob())
     }
-  
+
     getToken(token) {
       return fetch(`${ this._URL }/api/media`, {
         method: 'GET',
