@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Form.css';
+import './Form.scss';
 
 function Form({ greeting, name, buttonText, onRegister, onLogin }) {
 

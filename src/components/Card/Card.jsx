@@ -2,13 +2,12 @@ import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DescriptionIcon from '@mui/icons-material/Description';
 import API from '../../utils/API';
-import './Card.css';
+import './Card.scss';
 import fileDownload from 'js-file-download';
 
 function Card ({ id, name, mimeType, fileName, url, createdAt, setNumber, setFiles }) {
 
     const handleDelete = (e) => {
-        e.stopPropagation();
         API.removeCard(id)
         .then(() => {
             API.getUserData()

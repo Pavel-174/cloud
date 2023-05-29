@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import LogoutIcon from '@mui/icons-material/Logout';
 import API from '../../utils/API';
-import "./Account.css";
+import "./Account.scss";
 import Uppy from "@uppy/core";
 import { Dashboard } from "@uppy/react";
 import "@uppy/dashboard/dist/style.css";

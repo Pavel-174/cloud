@@ -1,0 +1,31 @@
+.account {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .account__header-box {
+        display: flex;
+        align-items: center;
+
+        .account__button-exit {
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            margin: 0 0 0 30px;
+            color: red;
+            transition: opacity 0.3s linear;
+
+            &:hover {
+                opacity: 0.4;
+            }
+        }
+    }
+    .account__cards {
+        list-style-type: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 0;
+    }
+}
