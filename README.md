@@ -1,4 +1,13 @@
-Проект Cloud.
+## Getting Started
 
-Для запуска проекта его нужно скачать себе на комп, после чего в командной строке ввести сначала 'npm i', а затем 'npm run start'.
-Проект запускается на localhost:3000
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `src/index.tsx`. The page auto-updates as you edit the file.
